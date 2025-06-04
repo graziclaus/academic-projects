@@ -10,7 +10,6 @@ def tabuleiro():
 
     return [[mar for _ in range(10)] for _ in range(10)]
 
-
 # -------------------------------------------------------------- Personalização --------------------------------------------------------------
 def tabuleiro_personalizacao(tamanho_matriz_tabuleiro):
 
@@ -40,7 +39,23 @@ def tabuleiro_personalizacao(tamanho_matriz_tabuleiro):
 
 # -------------------------------------------------------------- Montando onde cada barco vai ficar --------------------------------------------------------------
 
-def posicao_tropas(tamanho_matriz_tabuleiro):
+def verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicoes_tropas):
+
+    for linha, coluna in posicoes_tropas:
+
+        if tamanho_matriz_tabuleiro[linha][coluna] != mar:
+
+            return False
+
+    return True
+
+def colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicoes_tropas, emoji_navio):
+
+    for linha, coluna in posicoes_tropas:
+
+        tamanho_matriz_tabuleiro[linha][coluna] = emoji_navio
+
+def posicao_tropas(tamanho_matriz_tabuleiro, areas):
 
     # Dicionários para facilitar a vida, tenho a variável e o tamanho dela em uma só lista
     tamanhos_navios = {
@@ -63,49 +78,51 @@ def posicao_tropas(tamanho_matriz_tabuleiro):
 
     }
 
-    areas = {
+    # para o nome da area (jogador ou computador) e a area (onde vai campo), dentro do dicionário area
+    for nome_area, area in areas.items():
 
-        'area_computador': {'linhas': range(0, 4), 'colunas': range(0, 5)},
-        'area_jogador': {'linhas': range(5, 9), 'colunas': range(0, 5)},
-    }
+        # colocando os navios, linhas e colunas em uma lista para aleatorizar bem tanto vertical quanto horizontal depois
+        navios_lista = list(tamanhos_navios.items())
+        random.shuffle(navios_lista)
+        # Para cada nome e tamanho em tamanhos_navios, retorno a chave (Ex: porta_avioes) e o valor (Ex: 5) dele.
+        for nome, tamanho in tamanhos_navios.items():
 
-    posicoes_utilizadas = []
+            posicoes_possiveis_disponiveis = []
 
-    # Para cada nome e tamanho em tamanhos_navios, retorno a chave (Ex: porta_avioes) e o valor (Ex: 5) dele.
-    for nome, tamanho in tamanhos_navios.items():
+            linhas = list(area['linhas'])
+            colunas = list(area['colunas'])
+            random.shuffle(linhas)
+            random.shuffle(colunas)
 
-        posicao_possibilidades = []
+            # pega da onde vai tal linha (0-5 ou 0-5)
+            for linha in linhas:
 
-        # Para cada linha no tamanho da tamanho_matriz_tabuleiro
-        for linha in range(len(tamanho_matriz_tabuleiro)):
+                # pega da onde vai tal coluna (5-10 ou 0-5)
+                for coluna in colunas:
 
-            # Para cada coluna no tamanho da tamanho_matriz_tabuleiro
-            for coluna in range(len(tamanho_matriz_tabuleiro)):
+                    # posicionando os barcos horizontalmente
+                    if coluna + tamanho <= max(area['colunas']) + 1:
 
-                # verifica em cada coluna e linha, se o navio pode ficar e não vai exceder o tamanho da matriz
-                if coluna + tamanho <= 10:
+                        posicao_horizontal = [(linha, coluna + index) for index in range(tamanho)]
 
-                    posicao_horizontal = [(linha, coluna + index) for index in range(tamanho)]
-                    posicao_possibilidades.append(posicao_horizontal)
+                        if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_horizontal):
+                            posicoes_possiveis_disponiveis.append(posicao_horizontal)
 
-                if linha + tamanho <= 10:
+                    # posicionando os barcos verticalmente, pega o tamanho máximo da linha que tem da área, aumenta mais um para verificar se não vai extrapolar
+                    if linha + tamanho <= max(area['linhas']) + 1:
 
-                    posicao_vertical = [(linha + index, coluna) for index in range(tamanho)]
-                    posicao_possibilidades.append(posicao_vertical)
+                        posicao_vertical = [(linha + index, coluna) for index in range(tamanho)]
 
-        # coloca o navio em algum lugar aleatório
+                        if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_vertical):
 
-        if posicao_possibilidades:
+                            posicoes_possiveis_disponiveis.append(posicao_vertical)
 
-            posicao_escolhida = random.choice(posicao_possibilidades)
+            if posicoes_possiveis_disponiveis:
 
-            emoji_display_posicao = emojis_navios[nome]
-            # para cada linha e coluna na posicao_escolhida, coloco o emoji de cada barco respectivo e seu tamanho na linha e/ou coluna
-            for linha, coluna in posicao_escolhida:
-                tamanho_matriz_tabuleiro[linha][coluna] = emoji_display_posicao
-                posicoes_utilizadas.append((linha, coluna))
+                random.shuffle(posicoes_possiveis_disponiveis)
+                posicao_escolhida = posicoes_possiveis_disponiveis[0]
+                colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicao_escolhida, emojis_navios[nome])
 
-# fazer com que as aleatoriedades do barco reflitam uma em cada área corretamente
 
 # def escolha_jogador(tamanho_matriz_tabuleiro):
 
@@ -116,12 +133,16 @@ def posicao_tropas(tamanho_matriz_tabuleiro):
 
 def main():
 
-    tamanho_matriz_tabuleiro = tabuleiro()
-    posicao_tropas(tamanho_matriz_tabuleiro)
-    tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
-# escolha_jogador(tamanho_matriz_tabuleiro)
-#    escolha_computador(tamanho_matriz_tabuleiro)
+    areas = {
+        'area_computador': {'linhas': range(0, 5), 'colunas': range(0, 10)},
+        'area_jogador': {'linhas': range(5, 10), 'colunas': range(0, 10)},
+    }
 
+    tamanho_matriz_tabuleiro = tabuleiro()
+    posicao_tropas(tamanho_matriz_tabuleiro, areas)
+    tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
+    # escolha_jogador(tamanho_matriz_tabuleiro)
+    # escolha_computador(tamanho_matriz_tabuleiro)
 
 main()
-# Funções: tabuleiro, posição, verificar posição, fazer jogada (computador e player),
+# Funções: tabuleiro, posição, verificar posição, colocar posição, fazer jogada (computador e player), verificar jogada
