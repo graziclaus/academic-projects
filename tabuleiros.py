@@ -4,41 +4,43 @@ import random
 
 mar = "🌊"
 
-# -------------------------------------------------------------- Montando o tamanho do tabuleiro --------------------------------------------------------------
-
 def tabuleiro():
 
+    # Colocando matriz 10x10
     return [[mar for _ in range(10)] for _ in range(10)]
 
-# -------------------------------------------------------------- Personalização --------------------------------------------------------------
 def tabuleiro_personalizacao(tamanho_matriz_tabuleiro):
 
+    # Organizando a matriz, repartindo as áreas do jogador e do computador lado a lado, juntamente com os espaços e as linhas dividindo
     largura_terminal = shutil.get_terminal_size().columns
 
-    for index, linha in enumerate(tamanho_matriz_tabuleiro):
+    area_computador = tamanho_matriz_tabuleiro[:5]   # Linhas 0-4
+    area_jogador = tamanho_matriz_tabuleiro[5:]      # Linhas 5-9
 
-        linha_formatada = ' \033[31m│\033[0m '.join(linha)
-        espacos = max((largura_terminal - len(re.sub(r"\033\[[0-9;]*m", "", linha_formatada.strip()))) // 2, 0)
-        print(' ' * espacos + linha_formatada)
+    espacos_titulo = max((largura_terminal - 100) // 2, 0)
 
-        if index == 4:
+    print("\n" + " " * espacos_titulo + "\033[1;36mÁREA DO COMPUTADOR\033[0m" + " " * 40 + "\033[1;32mÁREA DO JOGADOR\033[0m\n")
 
-            linha_horizontal = ' \033[31m―\033[0m ' * (len(linha) * 2 - 1)
-            espacos = max((largura_terminal - len(re.sub(r"\033\[[0-9;]*m", "", linha_horizontal.strip()))) // 2, 0)
-            print(' ' * espacos + linha_horizontal.strip())
+    divisor = ' ' * 20 + '\033[33m║\033[0m' + ' ' * 20
 
-        elif index < len(tamanho_matriz_tabuleiro) - 1:
+    for linha_cima, linha_baixo in zip(area_computador, area_jogador):
 
-            linha_horizontal = ' \033[36m―\033[0m ' * (len(linha) * 2 - 1)
-            espacos = max((largura_terminal - len(re.sub(r"\033\[[0-9;]*m", "", linha_horizontal.strip()))) // 2, 0)
-            print(' ' * espacos + linha_horizontal.strip())
+        formatado_cima = ' \033[31m│\033[0m '.join(linha_cima)
+        formatado_baixo = ' \033[31m│\033[0m '.join(linha_baixo)
 
+        linha_completa = f"{formatado_cima}{divisor}{formatado_baixo}"
+        espacos = max((largura_terminal - len(re.sub(r'\033\[[0-9;]*m', '', linha_completa.strip()))) // 2, 0)
+        print(' ' * espacos + linha_completa)
 
-# ^ tudo decoração do tabuleiro feito pelo chatgpt
-# re é módulo de expressões regulares do Python, serve pra fazer buscas e substituições em texto usando padrões, tipo “achar tudo que bate com essa regra”
+        linha_horizontal = ' \033[36m―\033[0m ' * (len(linha_cima) * 2 - 1)
+        linha_horizontal_baixo = ' \033[36m―\033[0m ' * (len(linha_baixo) * 2 - 1)
+        linha_horizontal_completa = f"{linha_horizontal}{divisor}{linha_horizontal_baixo}"
+        espacos_horizontal = max((largura_terminal - len(re.sub(r'\033\[[0-9;]*m', '', linha_horizontal_completa.strip()))) // 2, 0)
+        print(' ' * espacos_horizontal + linha_horizontal_completa)
 
-# -------------------------------------------------------------- Montando onde cada barco vai ficar --------------------------------------------------------------
+# Personalização feita pelo chatgpt ^
 
+# Verifica se tem posições livres dentro do loop, caso não tenha, o navio não vai ser colocado naquele lugar, caso contrário, estaá tudo certo
 def verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicoes_tropas):
 
     for linha, coluna in posicoes_tropas:
@@ -51,13 +53,20 @@ def verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicoes_tropas):
 
 def colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicoes_tropas, emoji_navio):
 
+    # Verifica nas linhas e nas colunas, para colocar os emojis 
     for linha, coluna in posicoes_tropas:
-
         tamanho_matriz_tabuleiro[linha][coluna] = emoji_navio
 
-def posicao_tropas(tamanho_matriz_tabuleiro, areas):
+def configuracoes_tabuleiro(tamanho_matriz_tabuleiro):
+    
+    # Metade uma área para o usuário e outra metade para o computador
+    areas = {
 
-    # Dicionários para facilitar a vida, tenho a variável e o tamanho dela em uma só lista
+        'area_jogador': {'linhas': range(0, 5), 'colunas': range(0, 10)},
+        'area_computador': {'linhas': range(5, 10), 'colunas': range(0, 10)},
+
+    }
+
     tamanhos_navios = {
 
         'porta_avioes': 5,
@@ -78,71 +87,88 @@ def posicao_tropas(tamanho_matriz_tabuleiro, areas):
 
     }
 
-    # para o nome da area (jogador ou computador) e a area (onde vai campo), dentro do dicionário area
-    for nome_area, area in areas.items():
+    escolha_computador(tamanho_matriz_tabuleiro, areas['area_computador'], tamanhos_navios, emojis_navios)
+    escolha_jogador(tamanho_matriz_tabuleiro, areas['area_jogador'], tamanhos_navios, emojis_navios)
 
-        # colocando os navios, linhas e colunas em uma lista para aleatorizar bem tanto vertical quanto horizontal depois
-        navios_lista = list(tamanhos_navios.items())
-        random.shuffle(navios_lista)
-        # Para cada nome e tamanho em tamanhos_navios, retorno a chave (Ex: porta_avioes) e o valor (Ex: 5) dele.
-        for nome, tamanho in tamanhos_navios.items():
+def escolha_computador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navios):
 
-            posicoes_possiveis_disponiveis = []
+    # Coloco os navios em uma lista para poder aletorizar corretamente, ocupando espaço tanto na vertical quanto na horizontal
+    navios_lista = list(tamanhos_navios.items())
+    random.shuffle(navios_lista)
 
-            linhas = list(area['linhas'])
-            colunas = list(area['colunas'])
-            random.shuffle(linhas)
-            random.shuffle(colunas)
+    # para nome e tamanho na lista de navio, eu verifico cada linha e coluna para que a aletorização não ultrapasse as linhas
+    # da matriz
+    for nome, tamanho in navios_lista:
 
-            # pega da onde vai tal linha (0-5 ou 0-5)
-            for linha in linhas:
+        posicoes_possiveis_disponiveis = []
 
-                # pega da onde vai tal coluna (5-10 ou 0-5)
-                for coluna in colunas:
+        # coloco as linhas e colunas como lista para poder aleatoriza-las melhor
+        linhas = list(area['linhas'])
+        colunas = list(area['colunas'])
+        random.shuffle(linhas)
+        random.shuffle(colunas)
 
-                    # posicionando os barcos horizontalmente
-                    if coluna + tamanho <= max(area['colunas']) + 1:
+        # Percorrendo todas as linhas e colunas para poder armazenar a posição de cada tropa
+        for linha in linhas:
 
-                        posicao_horizontal = [(linha, coluna + index) for index in range(tamanho)]
+            for coluna in colunas:
 
-                        if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_horizontal):
-                            posicoes_possiveis_disponiveis.append(posicao_horizontal)
+                # Configurando posição para horizontalmente
+                if coluna + tamanho <= max(area['colunas']) + 1:
 
-                    # posicionando os barcos verticalmente, pega o tamanho máximo da linha que tem da área, aumenta mais um para verificar se não vai extrapolar
-                    if linha + tamanho <= max(area['linhas']) + 1:
+                    posicao_horizontal = [(linha, coluna + index) for index in range(tamanho)]
 
-                        posicao_vertical = [(linha + index, coluna) for index in range(tamanho)]
+                    # Se for verdadeiro a verificação, vai armazenar as posições na lista
+                    if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_horizontal):
 
-                        if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_vertical):
+                        posicoes_possiveis_disponiveis.append(posicao_horizontal)
 
-                            posicoes_possiveis_disponiveis.append(posicao_vertical)
+                # Configurando posição para verticalmente
+                if linha + tamanho <= max(area['linhas']) + 1:
 
-            if posicoes_possiveis_disponiveis:
+                    posicao_vertical = [(linha + index, coluna) for index in range(tamanho)]
 
-                random.shuffle(posicoes_possiveis_disponiveis)
-                posicao_escolhida = posicoes_possiveis_disponiveis[0]
-                colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicao_escolhida, emojis_navios[nome])
+                    # Se for verdadeiro a verificação, vai armazenar as posições na lista
+                    if verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicao_vertical):
+
+                        posicoes_possiveis_disponiveis.append(posicao_vertical)
+
+        # Aletorizo agora onde cada posição vai ficar após verificar se vai ser vertical ou horizontal, e então coloco dentro do tabuleiro
+        if posicoes_possiveis_disponiveis:
+
+            random.shuffle(posicoes_possiveis_disponiveis)
+            posicao_escolhida = posicoes_possiveis_disponiveis[0]
+            colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicao_escolhida, emojis_navios[nome])
+
+def escolha_jogador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navios):
+
+    while True:
+
+        for tentativas in range(5):
+        
+            for linha in range(len(tamanho_matriz_tabuleiro)):
+
+                coordenadas_linha_ataque_jogador = []
+
+                    coordenadas_coluna_ataque_jogador = []
+
+                    posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja atirar! Qual a linha que você deseja atacar? (0-5)"))
+                    posicao_coluna_escolha_jogador = int(input(f"Qual a coluna que você deseja atacar?: (5-10)"))
+
+                    linha.append(posicao_linha_escolha_jogador)
+                    coluna.append(posicao_coluna_escolha_jogador)
 
 
-# def escolha_jogador(tamanho_matriz_tabuleiro):
 
-
-
-# def escolha_computador(tamanho_matriz_tabuleiro):
-
+    escolha_computador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navios)
 
 def main():
 
-    areas = {
-        'area_computador': {'linhas': range(0, 5), 'colunas': range(0, 10)},
-        'area_jogador': {'linhas': range(5, 10), 'colunas': range(0, 10)},
-    }
-
     tamanho_matriz_tabuleiro = tabuleiro()
-    posicao_tropas(tamanho_matriz_tabuleiro, areas)
+    configuracoes_tabuleiro(tamanho_matriz_tabuleiro)
     tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
-    # escolha_jogador(tamanho_matriz_tabuleiro)
-    # escolha_computador(tamanho_matriz_tabuleiro)
 
 main()
-# Funções: tabuleiro, posição, verificar posição, colocar posição, fazer jogada (computador e player), verificar jogada
+
+
+# Adaptar o tabuleiro com as linhas sendo de A até J
