@@ -142,25 +142,60 @@ def escolha_computador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_n
 
 def escolha_jogador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navios):
 
-    while True:
+    navios_lista = list(tamanhos_navios.items())
 
-        for tentativas in range(5):
-        
-            for linha in range(len(tamanho_matriz_tabuleiro)):
+    for nome, tamanho in navios_lista:
 
-                coordenadas_linha_ataque_jogador = []
+        while True:
 
-                    coordenadas_coluna_ataque_jogador = []
+            print(f"\nVamos posicionar seu navio: \033[1m{nome.upper()}\033[0m, esse navio tem o tamanho de ({tamanho} espaços)")
 
-                    posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja atirar! Qual a linha que você deseja atacar? (0-5)"))
-                    posicao_coluna_escolha_jogador = int(input(f"Qual a coluna que você deseja atacar?: (5-10)"))
+            posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja colocar seus navios?! Qual a linha inicial que você quer posicionar? (0-5)"))
+            posicao_coluna_escolha_jogador = int(input(f"Qual a coluna inicial que você quer posicionar?: (5-10)"))
+            direcao_navio = input("Qual direção você deseja colocar seu navio? (Horizontal ou Vertical): ").lower()
 
-                    linha.append(posicao_linha_escolha_jogador)
-                    coluna.append(posicao_coluna_escolha_jogador)
+            if not (0 <= posicao_linha_escolha_jogador <= 5 <= posicao_coluna_escolha_jogador <= 10):
 
+                print("Você colocou algum digito errado ou a linha/coluna não é da sua área! Tente novamente.")
 
+                continue
 
-    escolha_computador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navios)
+            if direcao_navio not in ["horizontal", "vertical"]:
+
+                print("Direção inválida! Use 'Horizontal' ou 'Vertical'.")
+
+                continue
+
+            if direcao_navio == "horizontal":
+
+                if posicao_linha_escolha_jogador + tamanho <= max(area['colunas']) + 1:
+
+                    print("Navio não cabe horizontalmente nessa posição! Tente outra.")
+                    continue
+
+                posicoes = [(posicao_linha_escolha_jogador, posicao_coluna_escolha_jogador + index) for index in range(tamanho)]
+
+            else:
+
+                if posicao_linha_escolha_jogador + tamanho > max(area['linhas']) + 1:
+
+                    print("Navio não cabe verticalmente nessa posição. Tente outra.")
+                    continue
+
+                posicoes = [(posicao_linha_escolha_jogador + index, posicao_coluna_escolha_jogador) for index in range(tamanho)]
+
+            if not verificar_posicoes_livres(tamanho_matriz_tabuleiro, posicoes):
+
+                print("Já tem navio nessa posição. Escolha outra.")
+                continue
+
+            print("\n\033[1mSeu tabuleiro agora:\033[0m")
+            tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
+            colocar_navio_tabuleiro(tamanho_matriz_tabuleiro, posicoes, emojis_navios[nome])
+            print(f"Navio {nome} posicionado!\n")
+            break
+
+            # fiz alguma coisa nas linhas e colunas, a distribuição de linhas e colunas devem estar erradas
 
 def main():
 
