@@ -23,7 +23,7 @@ def tabuleiro_personalizacao(tamanho_matriz_tabuleiro):
     espacos_titulo = max((largura_terminal - 100) // 2, 0)
 
     print(
-        "\n" + " " * espacos_titulo + "\033[1;36mÁREA DO JOGADOR\033[0m" + " " * 40 + "\033[1;32mÁREA DO COMPUTADOR\033[0m\n")
+        "\n" + " " * espacos_titulo + "\033[1;36mÁREA DO JOGADOR\033[0m" + " " * 60 + "\033[1;32mÁREA DO COMPUTADOR\033[0m\n")
 
     # Formatando as letras A–J com espaçamento entre elas para exibição nas colunas
     letras = '    ' + '  '.join([f' {l} ' for l in letras_colunas])
@@ -172,7 +172,7 @@ def escolha_jogador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navi
             print(f"\nVamos posicionar seu navio: \033[1m{nome.upper()}\033[0m, esse navio tem o tamanho de ({tamanho} espaços)")
             tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
 
-            posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja colocar seus navios?! Qual a linha inicial que você quer posicionar? (1-5): "))
+            posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja colocar seus navios! Qual a linha inicial que você quer posicionar? (1-5): "))
             posicao_coluna_escolha_jogador = input(f"Qual a coluna inicial que você quer posicionar? (A-J):").upper()
             direcao_navio = input("Qual direção você deseja colocar seu navio? (Horizontal ou Vertical): ").lower()
 
