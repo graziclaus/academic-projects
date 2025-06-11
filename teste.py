@@ -23,7 +23,6 @@ def verificar_posicoes_livres(tabuleiro, posicoes):
 
     return True
 
-
 def colocar_navio(tabuleiro, posicoes, emoji):
 
     for linha, coluna in posicoes:
@@ -179,7 +178,7 @@ def escolha_computador(tabuleiro_oculto_computador, tamanhos_navios, emojis_navi
 
             if verificar_posicoes_livres(tabuleiro_oculto_computador, posicoes):
 
-                colocar_navio(tabuleiro_oculto_computador, posicoes, emojis_navios[nome])
+                colocar_navio(tabuleiro_oculto_computador, posicoes, "🐙") # Usa sempre o polvo
 
                 navios_computador.append({'nome': nome, 'tamanho': tamanho, 'emoji': emojis_navios[nome],'posicoes_restantes': posicoes.copy()})
                 break
