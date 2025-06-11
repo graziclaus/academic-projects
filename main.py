@@ -1,7 +1,11 @@
+# instalação via terminal -> pip install pillow rich #
 import re
 import shutil
 import random
+from time import sleep
 import time
+from PIL import Image, ImageDraw
+from rich.console import Console
 
 mar = "🌊"
 
