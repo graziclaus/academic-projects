@@ -116,7 +116,7 @@ def escolha_jogador(tabuleiro_oculto_jogador, tamanhos_navios, emojis_navios, na
                     print("Navio não cabe horizontalmente nessa posição. Tente outra.")
                     continue
 
-                posicoes = [(linha, coluna + i) for i in range(tamanho)]
+                posicoes = [(linha, coluna + index) for index in range(tamanho)]
 
             else:
 
@@ -125,7 +125,7 @@ def escolha_jogador(tabuleiro_oculto_jogador, tamanhos_navios, emojis_navios, na
                     print("Navio não cabe verticalmente nessa posição. Tente outra.")
                     continue
 
-                posicoes = [(linha + i, coluna) for i in range(tamanho)]
+                posicoes = [(linha + index, coluna) for index in range(tamanho)]
 
             if not verificar_posicoes_livres(tabuleiro_oculto_jogador, posicoes):
 
@@ -139,11 +139,11 @@ def escolha_jogador(tabuleiro_oculto_jogador, tamanhos_navios, emojis_navios, na
             print(f"Navio {nome} posicionado!\n")
             print("\n\033[1mSeu tabuleiro agora:\033[0m")
 
-            for i, linha_tab in enumerate(tabuleiro_oculto_jogador):
+            for index, linha_tab in enumerate(tabuleiro_oculto_jogador):
 
-                print(f"{i + 1:<2} " + ' │ '.join(linha_tab))
+                print(f"{index + 1:<2} " + ' │ '.join(linha_tab))
 
-            print('    ' + '  '.join([f' {chr(i)} ' for i in range(65, 75)]))
+            print('    ' + '  '.join([f' {chr(index)} ' for index in range(65, 75)]))
             break
 
 
@@ -165,7 +165,7 @@ def escolha_computador(tabuleiro_oculto_computador, tamanhos_navios, emojis_navi
                 if coluna + tamanho > 10:
                     continue
 
-                posicoes = [(linha, coluna + i) for i in range(tamanho)]
+                posicoes = [(linha, coluna + index) for index in range(tamanho)]
 
             else:
 
@@ -173,7 +173,7 @@ def escolha_computador(tabuleiro_oculto_computador, tamanhos_navios, emojis_navi
 
                     continue
 
-                posicoes = [(linha + i, coluna) for i in range(tamanho)]
+                posicoes = [(linha + index, coluna) for index in range(tamanho)]
 
             if verificar_posicoes_livres(tabuleiro_oculto_computador, posicoes):
 
