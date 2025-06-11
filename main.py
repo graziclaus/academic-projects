@@ -133,7 +133,7 @@ def escolha_jogador(tamanho_matriz_tabuleiro, area, tamanhos_navios, emojis_navi
             tabuleiro_personalizacao(tamanho_matriz_tabuleiro)
 
             posicao_linha_escolha_jogador = int(input(f"Escolha as posições que você deseja colocar seus navios! Qual a linha inicial que você quer posicionar? (1-5): "))
-            posicao_coluna_escolha_jogador = input(f"Qual a coluna inicial que você quer posicionar? (A-J):").upper()
+            posicao_coluna_escolha_jogador = input(f"Qual a coluna inicial que você quer posicionar? (A-J): ").upper()
             direcao_navio = input("Qual direção você deseja colocar seu navio? (Horizontal ou Vertical): ").lower()
 
             if not (1 <= posicao_linha_escolha_jogador <= 5):
