@@ -1,65 +1,51 @@
 import random
 
-# Função que define o que acontece quando um ataque é feito (acertando um navio ou não)
+# Exemplo de frota
+frota = {
+    '🛥️': {'tamanho': 1, 'posicoes': [(0, 0)], 'atingido': []},
+    '🛢️': {'tamanho': 4, 'posicoes': [(1, 0), (1, 1), (1, 2), (1, 3)], 'atingido': []}
+}
+
+def verificar_afundamento(frota, navio):
+    return set(frota[navio]["posicoes"]) == set(frota[navio]["atingido"])
+
 def ataque(tabuleiro_oculto, tabuleiro_visivel, coordenadas, frota):
     linha, coluna = coordenadas
 
-    if tabuleiro_oculto[linha][coluna] != "🌊": 
+    if tabuleiro_oculto[linha][coluna] != "🌊":
         tabuleiro_visivel[linha][coluna] = "💥"
         navio_acertado = tabuleiro_oculto[linha][coluna]
-
-        # Marca acerto na frota
         frota[navio_acertado]["atingido"].append((linha, coluna))
 
-        # Ao afundar um navio, o jogador ou computador joga novamente
         if verificar_afundamento(frota, navio_acertado):
             print(f"Você afundou o {navio_acertado} inimigo!")
             return True
-        # Ao acertar parte de um navio, a vez é passada
         else:
-            print(f"Você acertou uma parte do {navio_acertado}!")
-            return False
-        
-    # Ao errar o ataque, a vez também é passada
+            print(f"Você acertou o {navio_acertado}!")
+            return True
     else:
         tabuleiro_visivel[linha][coluna] = "❌"
-        print("Você errou o tiro.")
-        return False 
+        print("Errou o tiro!")
+        return False
 
-    # Quantidade de embarcações restantes após o ataque
-    restantes = contar_embarcacoes_vivas(frota)
-    print(f"Restam {restantes} navios inimigos.")
+# TESTE RÁPIDO
+def criar_tabuleiro_vazio():
+    return [["🌊" for _ in range(10)] for _ in range(10)]
 
-# Função que verifica um navio foi afundado (atingido em todas as suas posições)
-def verificar_afundamento(frota, nome_navio):
-    posicoes = frota[nome_navio]["posicoes"]
-    atingidos = frota[nome_navio]["atingido"]
-    return set(posicoes) == set(atingidos)
+# Teste com mini cenário
+tab_oculto = criar_tabuleiro_vazio()
+tab_visivel = criar_tabuleiro_vazio()
 
-# Função que verifica se todas as embarcações foram afundadas
-def todas_embarcacoes_afundadas(frota):
-    for navio in frota.values():
-        if set(navio["posicoes"]) != set(navio["atingido"]):
-            return False
-    return True
+# Coloca os navios visivelmente no tabuleiro oculto (o real do inimigo)
+for navio, info in frota.items():
+    for linha, col in info["posicoes"]:
+        tab_oculto[linha][col] = navio
 
-# Função que aleatoriza o ataque do computador
-def escolher_ataque_aleatorio(tiros_realizados):
-    while True:
-        linha = random.randint(0, 9)
-        coluna = random.randint(0, 9)
-        
-        # Verifica que a posição randomizada já não foi jogada
-        if (linha, coluna) not in tiros_realizados:
-            return (linha, coluna)
+# Atacando uma posição com navio
+ataque(tab_oculto, tab_visivel, (1, 1), frota)
+# Atacando água
+ataque(tab_oculto, tab_visivel, (5, 5), frota)
 
-# Função que verifica quantas embarcações restantes estão em cada tabuleiro
-def contar_embarcacoes_vivas(frota):
-    vivas = 0
-    for navio in frota.values():
-        if set(navio["posicoes"]) != set(navio["atingido"]):
-            vivas += 1
-    return vivas
 
 
 # Função de ataque
