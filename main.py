@@ -41,8 +41,8 @@ def print_tabuleiros_inicial_e_final(tabuleiro_jogador, tabuleiro_computador, is
     espacos_titulo = max((largura_terminal - 100) // 2, 0)
 
     print(
-        "\n" + " " * espacos_titulo + "\033[1;36mSEU TABULEIRO\033[0m" + " " * 60 + "\033[1;32mTABULEIRO DOS ALIENÍGENAS\033[0m\n")
-    letras = '    ' + '  '.join([f' {l} ' for l in letras_colunas])
+        "\n" + " " * espacos_titulo + "\033[1;36mSEU TABULEIRO\033[0m" + "  " * 60 + "\033[1;32mTABULEIRO DOS ALIENÍGENAS\033[0m\n")
+    letras = ' ' + ' '.join([f' {l} ' for l in letras_colunas])
     divisor = '  ' * 10 + '\033[33m║\033[0m' + ' ' * 10
     print(' ' * espacos_titulo + letras + divisor + letras)
 
@@ -266,8 +266,8 @@ def print_tabuleiros_jogo(tabuleiro_oculto_jogador, tabuleiro_visivel_computador
 
     print(
         "\n" + " " * espacos_titulo + "\033[1;32mSEUS ATAQUES (ALIENÍGENAS)\033[0m" + " " * 60 + "\033[1;36mSEU TABULEIRO (ATAQUES DOS ALIENÍGENAS)\033[0m\n")
-    letras = '    ' + '  '.join([f' {l} ' for l in letras_colunas])
-    divisor = '  ' * 10 + '\033[33m║\033[0m' + ' ' * 10
+    letras = '  ' + '  '.join([f' {l} ' for l in letras_colunas])
+    divisor = ' ' * 10 + '\033[33m║\033[0m' + ' ' * 10
     print(' ' * espacos_titulo + letras + divisor + letras)
 
     for index in range(5):
@@ -305,7 +305,7 @@ def jogo_batalha_naval(tabuleiro_oculto_jogador, tabuleiro_visivel_jogador, tabu
 
     turno_jogador = True
 
-     print("\nVamos começar o jogo! Você vai atacar o tabuleiro dos alienígenas e os alienígenas vão atacar o seu.")
+    print("\nVamos começar o jogo! Você vai atacar o tabuleiro dos alienígenas e os alienígenas vão atacar o seu.")
 
     while True:
 
@@ -316,11 +316,14 @@ def jogo_batalha_naval(tabuleiro_oculto_jogador, tabuleiro_visivel_jogador, tabu
             print("\n\033[1;34mSua vez de atacar!\033[0m")
 
             acertou = ataque(tabuleiro_oculto_computador, tabuleiro_visivel_computador, True, navios_computador)
-             pixel_artWIN()
+                
+            if fim_jogo(navios_computador): 
+                pixel_artWIN()
                 print("\n\033[1;32mParabéns! Você venceu a batalha contra os alienígenas!\033[0m")
                 print_tabuleiros_inicial_e_final(tabuleiro_oculto_jogador, tabuleiro_oculto_computador, is_final=True)
                 print("\nIntegrantes do grupo: Edoarda Cenci, Grazielle Claus e Julia Mamus.")
-                break
+                break 
+
         else:
             print("\n\033[1;31mVez do computador atacar!\033[0m")
 
@@ -375,6 +378,7 @@ def main():
                        tabuleiro_visivel_computador, navios_jogador, navios_computador)
 
 
+# --------------------------------------- Execução das pixels arts e historinhas ---------------------------------------
     
 def digitar_com_pausa(texto, pausa_entre_caracteres=0.05, pausa_nos_pontos=0.5, linhas=0.00):
   for caractere in texto:
