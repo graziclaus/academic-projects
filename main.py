@@ -1,6 +1,7 @@
 import re
 import shutil
 import random
+import time
 
 mar = "🌊"
 
@@ -326,6 +327,8 @@ def jogo_batalha_naval(tabuleiro_oculto_jogador, tabuleiro_visivel_jogador, tabu
 
         if not acertou:
             turno_jogador = not turno_jogador
+        if not turno_jogador:
+            time.sleep(3)
 
 
 def main():
