@@ -319,6 +319,7 @@ def jogo_batalha_naval(tabuleiro_oculto_jogador, tabuleiro_visivel_jogador, tabu
              pixel_artWIN()
                 print("\n\033[1;32mParabéns! Você venceu a batalha contra os alienígenas!\033[0m")
                 print_tabuleiros_inicial_e_final(tabuleiro_oculto_jogador, tabuleiro_oculto_computador, is_final=True)
+                print("\nIntegrantes do grupo: Edoarda Cenci, Grazielle Claus e Julia Mamus.")
                 break
         else:
             print("\n\033[1;31mVez do computador atacar!\033[0m")
@@ -328,6 +329,7 @@ def jogo_batalha_naval(tabuleiro_oculto_jogador, tabuleiro_visivel_jogador, tabu
                 pixel_artLOST
                 print("\n\033[1;31mO Você perdeu! As tropas alienigenas conseguiram reguperar o pequeno alienígena.\033[0m")
                 print_tabuleiros_inicial_e_final(tabuleiro_oculto_jogador, tabuleiro_oculto_computador, is_final=True)
+                print("\nIntegrantes do grupo: Edoarda Cenci, Grazielle Claus e Julia Mamus.")
                 break
 
         if not acertou:
