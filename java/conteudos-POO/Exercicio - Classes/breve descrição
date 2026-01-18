@@ -1,0 +1,16 @@
+Crie uma classe Pessoa com atributos públicos:
+
+nome (String)
+idade (int)
+telefone (String)
+email (String)
+No main, use um ArrayList de Pessoa para armazenar os cadastros.
+
+O programa deve mostrar um menu interativo com as opções:
+
+Cadastrar nova pessoa
+Listar todas as pessoas
+Buscar pessoa por nome
+Atualizar dados de uma pessoa
+Remover pessoa pelo nome
+Sair
