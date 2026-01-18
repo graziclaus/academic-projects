@@ -1,0 +1,31 @@
+
+Funções em JS
+Objetivo:
+Compreender e aplicar funções em JavaScript, explorando parâmetros, retorno de valores e
+reutilização de código.
+Descrição:
+Você deverá desenvolver uma pequena aplicação que utilize funções para realizar operações
+matemáticas e manipulação de dados. A atividade deve evidenciar o uso de funções
+nomeadas, funções anônimas e arrow functions.
+O que deve ser feito:
+• Criar funções que realizem operações básicas (soma, subtração, multiplicação, divisão).
+• Implementar uma função que manipule arrays (ex: filtrar números pares, calcular média).
+• Usar arrow functions em pelo menos duas partes do código.
+• Criar uma função que receba outra função como parâmetro (callback).
+Entrega:
+• Arquivo .html com código JavaScript embutido ou .js externo.
+• Documentação curta (1 página) explicando as funções criadas e seus usos.
+• Submissão via repositório no GitHub.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------]
+
+Funções de operações básicas: as funções de operações básicas pegam dois números que foram definidos nos parâmetros e realizar a operação desejada. Essas operações são usadas quando o usuário quer
+fazer continhas básicas com números pequenos ou maiores.
+
+Função com Array: A função encontrarMaior pega o primeiro número do índice e vai comparando com todos os números do loop for, e se for maior que o próximo ele é armazenado na váriavel "maior". Essa função pode ser usada
+para pegar com mais facilidade vários números dentro da array e filtrar quem é o maior do array.
+
+Função com Arrow Function: A primeira função chamada filtrarPares() faz a divisão por 2, se resultar em 0, ele mantêm dentro do array. Caso contrário, ele não fica dentro do array. O reduce meio que
+ignora os números ímpares, pois eles não atendem a condição "num %2 == 0". Já na função calcularMedia(), ele soma todos os números do array usando reduce e então, essa soma é divido pelo tamanho do array.
+
+Função chamando outra função: A função chamarOutraFuncao() pega uma das funções de matemática básica e então, executa ela usando outros parâmetros de números dentro.

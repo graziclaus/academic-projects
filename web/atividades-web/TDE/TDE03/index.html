@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisições HTTP com JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Requisições HTTP com JavaScript</h1>
+
+    <button id="btnCarregar">Carregar Posts</button>
+
+    <div class="container">
+        
+        <div class="bloco" id="bloco-posts">
+
+            <h2>Lista de Posts</h2>
+            <div id="resultado"></div>
+
+        </div>
+
+        <div class="bloco" id="bloco-form">
+
+            <h2 id="titulo-form">Criar Novo Post</h2>
+
+            <form id="mini-form">
+
+                <input type="text" id="titulo" placeholder="Título" required>
+
+                <textarea id="conteudo" placeholder="Conteúdo" required></textarea>
+
+                <button type="submit">Enviar</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

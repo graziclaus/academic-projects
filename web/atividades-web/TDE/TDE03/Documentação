@@ -1,0 +1,8 @@
+Esse app foi criado pra aprender a usar as APIs com JavaScript. A API que escolhi, é JSONPlaceholder ( link: https://jsonplaceholder.typicode.com/posts.)
+Essa API é uma API que está aberta para teste. Ele simula dados reais como posts, usuários, e comentários, mas não salva nada de verdade. Fui utilizando o endpoint/posts , que traz uma lista de postagens de título e conteúdo:
+
+→ Quando o usuário clica no botão "Carregar Posts", o JavaScript faz um pedido GET com fetch. A função get, usa async/await para coletar os dados e colocá-los na tela. Esse pedido busca os posts da API e depois mostra cada um em um cartão na página, mostrando o texto e o conteúdo.
+
+→ Quando edita um post que já existe, a função PUT pega os dados do item escolhido, coloca a informação no formulário para que você possa mudar o texto ou o assunto, e depois atualiza o array local com as novas. Assim a postagem atualizada é mostrada na tela de imediato sem precisar recarregar a página͏.
+
+→ O remove, elimina a mensagem do array local e atualiza a lista de postagens na tela, dando a sensação de que o item foi apagado do sistema. Tudo isso acontece só no navegador, de um jeito rápido e fácil para o usuário. Isso ajuda a gente aprender como funcionam essas ações de CRUD sem precisar de uma parte de trás.
