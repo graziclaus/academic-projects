@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+html, body {
+
+    height: 100%;
+    margin: 0;
+
+}
+
+body{
+
+    background-color: #0D1B2A;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header{
+
+    position: relative;
+    background: #0D1B2A;
+    z-index: 1;
+
+}
+
+header::after{
+
+    content:"";
+    position:absolute;
+    left:0; 
+    right:0;
+    bottom:-60px;
+    height:60px;
+    background: linear-gradient(to bottom, #0D1B2A 0%, rgba(13,27,42,0) 100%);
+
+}
+
+main {
+
+    flex: 1;
+
+}
+
+main h2{
+
+    color: #E63946;
+    font-family: "Luckiest Guy", cursive;
+    letter-spacing: 3px;
+
+}
+
+section{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.logo-site{
+
+    padding: 10px;
+
+}
+
+.sanduiche{
+
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    font-size: 40px;
+    color: #D3D3D3;
+
+}   
+
+.sanduiche:hover{
+
+    cursor: pointer;
+
+}
+
+.cabecalho{
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 100%;
+    gap: 50px;
+
+}
+
+.cabecalho a {
+
+    position: relative;
+    text-decoration: none;
+    color: #faf4f4;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: 0.5s;
+
+}
+
+.cabecalho a:hover{
+
+    color: #F4A261;
+    transition: 0.5s;
+
+}
+
+.cabecalho a::after {
+
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #E63946;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 30px;
+
+}
+
+.cabecalho a:hover::after {
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+.cabecalho a:not(:hover)::after {
+
+    transform: scaleX(0);
+    transform-origin: right; 
+
+}
+
+.cabecalhoa a.ativo{
+
+    border-bottom: 4px solid #E63946;
+
+}
+
+.cabecalho a.ativo::after {
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+.banner {
+
+    background: #ffffff;
+    position: relative;
+    padding: 120px 60px 100px 100px;
+
+}
+
+.banner::before {
+
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 200px;
+    background-color: #0D1B2A;
+    border-radius: 50% 50% 0 0;
+
+}
+
+.banner::after {
+
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 620px;
+    height: 350px;
+    background-color: #0D1B2A;
+    clip-path: polygon(0% 100%, 20% 0%, 70% 60%, 60% 25%, 80% 0%, 100% 100%, 100% 100%, 0% 100%);
+    
+}
+
+.banner h1 {
+
+    position: relative;
+    z-index: 2;
+    font-size: 2.5rem;
+    margin: 0;
+    text-align: center;
+    border: 5px solid #cb544e;
+    background-color: #0d1b2a9a;
+
+}
+
+.cards-containers{
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cards-containers-cima, .cards-containers-baixo{
+
+    position: relative;
+    display: flex;
+    gap: 5em;
+    padding-top: 60px;
+
+}
+
+.card{
+
+    display: grid;
+    background-color: #cb544e;
+    border-radius: 33px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.5s;
+    padding: 20px; 
+    max-width: 350px;
+
+}
+
+.card p{
+
+    font-family: 'Popping', sans-serif;
+    font-size: 18px;
+    padding-bottom: 1em;
+    color: #131313;
+
+}
+
+.card button{
+
+    background-color: #0D1B2A;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px 10px 25px;
+    justify-self: center;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+.card button:hover{
+
+    background-color: #F4A261;
+    transition: 0.5s;
+
+}
+
+.card:hover {
+    
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.6);
+
+}
+
+.card h2 {
+
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    margin-top: 10px;
+
+}
+
+.cards-containers-cima .card img, .cards-containers-baixo img{
+
+    object-fit: cover;
+    object-position: center;
+    width: 350px;
+    height: 300px;
+    border-radius: 30px;
+
+}
+
+.popup-overlay {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+}
+
+.popup-overlay.show {
+
+    display: flex;
+    opacity: 1;
+
+}
+
+.popup-content {
+
+    background-color: #0D1B2A;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    color: white;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+
+}
+
+.popup-overlay.show .popup-content {
+
+    transform: scale(1);
+
+}
+
+.popup-content img {
+
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+
+}
+
+.popup-close {
+
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+
+}
+
+.popup-content ul{
+
+
+    border-bottom: 4px dotted #E63946;
+    padding-bottom: 2em;
+
+}
+
+.popup-content p mark{
+
+    background-color: #F4A261;
+
+}
+
+.tabela-viloes{
+
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5em;
+    color: white;
+
+}
+
+th{
+
+    background-color: #F4A261;
+
+}
+
+tr{
+
+    background-color: #cb544e;
+
+}
+
+footer{
+
+    position: relative;
+    display: flex;
+    height: 100%;
+    background-color: #0D1B2A;
+    margin-top: 10em;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    padding-top: 5em;
+    padding-bottom: 5em;
+
+}
+
+.logo-site-footer h1{
+
+    font-family: "Bangers", system-ui;
+
+}
+
+footer div div{
+
+    font-size: 15px;
+
+}   
+
+footer nav{
+
+    display: grid;
+    justify-content: center;
+    justify-items: center; 
+    gap: 15px;
+
+}
+
+footer nav a{
+
+    text-decoration: none;
+    color: white;
+
+}
+
+footer nav a {
+
+    position: relative;
+    text-decoration: none;
+    color: #faf4f4;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: 0.5s;
+    width: max-content;
+
+}
+
+footer nav a:hover, footer .footer-icons li i:hover{
+
+    color: #F4A261;
+    transition: 0.5s;
+
+}
+
+footer nav a::after, footer .footer-icons li i::after{
+
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #E63946;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 30px;
+
+}
+
+footer nav a:hover::after, footer .footer-icons li i:hover::after{
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+footer nav a:not(:hover)::after, footer .footer-icons li i:not(:hover)::after{
+
+    transform: scaleX(0);
+    transform-origin: right; 
+
+}
+
+footer ul{
+
+    display: flex;
+    font-size: 40px;
+    gap: 20px;
+
+}
+
+footer .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+footer .footer-icons li i {
+
+    font-size: 30px;
+    color: #faf4f4;
+    position: relative;
+    transition: 0.3s;
+
+}

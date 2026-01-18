@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+html, body {
+
+    height: 100%;
+    margin: 0;
+
+}
+
+body{
+
+    background-color: #0D1B2A;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header{
+
+    position: relative;
+    background: #0D1B2A;
+    z-index: 1;
+
+}
+
+header::after{
+
+    content:"";
+    position:absolute;
+    left:0; 
+    right:0;
+    bottom:-60px;
+    height:60px;
+    background: linear-gradient(to bottom, #0D1B2A 0%, rgba(13,27,42,0) 100%);
+
+}
+
+main {
+
+    flex: 1;
+
+}
+
+section{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.logo-site{
+
+    padding: 10px;
+
+}
+
+.sanduiche{
+
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    font-size: 40px;
+    color: #D3D3D3;
+
+}   
+
+.sanduiche:hover{
+
+    cursor: pointer;
+
+}
+
+.cabecalho{
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 100%;
+    gap: 50px;
+
+}
+
+.cabecalho a {
+
+    position: relative;
+    text-decoration: none;
+    color: #faf4f4;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: 0.5s;
+
+}
+
+.cabecalho a:hover{
+
+    color: #F4A261;
+    transition: 0.5s;
+
+}
+
+.cabecalho a::after {
+
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #E63946;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 30px;
+
+}
+
+.cabecalho a:hover::after {
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+.cabecalho a:not(:hover)::after {
+
+    transform: scaleX(0);
+    transform-origin: right; 
+
+}
+
+.cabecalhoa a.ativo{
+
+    border-bottom: 4px solid #E63946;
+
+}
+
+.cabecalho a.ativo::after {
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+.banner {
+
+    position: relative;
+    height: 80vh;
+    background: url("imagens/fundo-pagina-inicial.png") no-repeat center center/cover;
+
+}
+
+.banner::after {
+
+    content: "";
+    position: absolute;
+    bottom: -1px; 
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, #0D1B2A);
+    
+}
+
+.banner-overlay {
+
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+    background-color: #0d1b2aaf;
+    padding: 0 25px 0 25px;
+    border: 5px solid white;
+    border-radius: 5px;
+
+}
+
+.conteudo {
+
+    display: grid;
+    background-color: #0D1B2A;
+    color: white;
+    padding: 60px 20px;
+    justify-content: center;
+
+}
+
+.cards-paginas{
+
+    display: flex;
+    gap: 4em;
+
+}
+
+.cards{
+
+    display: flex;
+    align-items: center;
+    background-color: #cb544e;
+    border-radius: 30px;
+    width: 520px;
+    transition: 0.5s;
+
+}
+
+.cards:hover{
+
+    transform: translateY(-10px);
+    transition: 0.5s;
+
+}
+
+
+.texto-banner{
+
+    text-align: center;
+    padding: 10px;
+    color: #ffffff;
+
+}
+
+.texto-banner h3{
+
+    font-size: 25px;
+    font-family: "Luckiest Guy", cursive;
+    letter-spacing: 2px;
+
+}
+
+.texto-banner p{
+
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.imagens-banner {
+
+    position: relative;
+    display: inline-block;
+    
+}
+
+.imagens-banner img {
+    display: block;
+    width: 350px;
+    height: 200px;
+    object-fit: cover;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* Gradiente que escurece só no lado esquerdo da imagem */
+.imagens-banner::after {
+
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0; /* encosta no texto */
+    width: 80px; /* controla até onde vai o fade */
+    height: 100%;
+    background: linear-gradient(to right, #cb544e, transparent);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+
+footer{
+
+    position: relative;
+    display: flex;
+    height: 100%;
+    background-color: #0D1B2A;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    padding-top: 5em;
+    padding-bottom: 5em;
+
+}
+
+.logo-site-footer h1{
+
+    font-family: "Bangers", system-ui;
+
+}
+
+footer div div{
+
+    font-size: 15px;
+
+}   
+
+footer nav{
+
+    display: grid;
+    justify-content: center;
+    justify-items: center; 
+    gap: 15px;
+
+}
+
+footer nav a{
+
+    text-decoration: none;
+    color: white;
+
+}
+
+footer nav a {
+
+    position: relative;
+    text-decoration: none;
+    color: #faf4f4;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: 0.5s;
+    width: max-content;
+
+}
+
+footer nav a:hover, footer .footer-icons li i:hover{
+
+    color: #F4A261;
+    transition: 0.5s;
+
+}
+
+footer nav a::after, footer .footer-icons li i::after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #E63946;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 30px;
+}
+
+footer nav a:hover::after, footer .footer-icons li i:hover::after{
+
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
+
+footer nav a:not(:hover)::after, footer .footer-icons li i:not(:hover)::after{
+
+    transform: scaleX(0);
+    transform-origin: right; 
+
+}
+
+footer ul{
+
+    display: flex;
+    font-size: 40px;
+    gap: 20px;
+
+}
+
+footer .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+footer .footer-icons li i {
+
+    font-size: 30px;
+    color: #faf4f4;
+    position: relative;
+    transition: 0.3s;
+
+}
